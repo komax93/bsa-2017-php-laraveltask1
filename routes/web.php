@@ -15,10 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/cars', function () {
+Route::get('/cars', 'CarsController@index');
 
-});
-
-Route::get('/cars/random', function () {
-
-});
+Route::get('/cars/random', 'CarsController@getRandom');
