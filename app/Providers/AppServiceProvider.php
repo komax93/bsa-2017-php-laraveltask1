@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Services\Contracts\{RandomGenerator, CarSharing};
+use App\Services\{RandomGeneratorService, CarSharingService};
+use App\Repositories\Contracts\Repository;
+use App\Repositories\CarRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +27,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(RandomGenerator::class, RandomGeneratorService::class);
+
+        $this->app->bind('App\Repositories\CarRepository', function () {
+            return new CarRepository();
+        });
+
+        $this->app->bind(CarSharing::class, CarSharingService::class);
     }
 }
